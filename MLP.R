@@ -4,20 +4,20 @@ install.packages('reticulate')
 require(reticulate)
 
 
-#installing 'devtools' package for installing Packages from github
+
 install.packages('devtools')
 
-devtools::install_github("rstudio/keras") 
+
 #installing keras 
 #It will first install tensorflow then keras.
 
 
  
-#The above code will install the keras library from the GitHub repository.
+
 
 #loading keras in R 
 library(keras)
-#The R interface to Keras uses TensorFlow as it’s underlying computation engine.
+#The R interface to Keras uses TensorFlow as itâ€™s underlying computation engine.
 #So we need to install Tensorflow engine
 install_tensorflow()
 
@@ -25,11 +25,7 @@ install_tensorflow()
 install_tensorflow(gpu = T)
 
 
-#Getting started with Keras for R
-#The core data structure of Keras is a model, a way to organize layers. 
-#The simplest type of model is the Sequential model, a linear stack of layers. 
-#For more complex architectures, you should use the Keras functional API, 
-#which allows to build arbitrary graphs of layers.
+
 
 #loading the keras inbuilt mnist dataset
 data<-dataset_mnist()
@@ -65,24 +61,22 @@ test_y<-to_categorical(test_y,10)
 #Now defining a keras MLP sequential model containing a linear stack of layers
 model <- keras_model_sequential()
 
-#defining the model with 1 input layer[256 neurons], 1 hidden layer[128 neurons] 
-#with dropout rate 0.4 and 1 output layer[10 neurons]
-#i.e number of digits from 0 to 9
+
 
 model %>% 
   #Input layer-256 units
   #Add a densely-connected NN layer to an output
   layer_dense(units=256,activation="relu",input_shape=c(784))  %>%
   #dropout layer to prevent Overfitting
-  layer_dropout(rate=0.4) %>%
+  layer_dropout(rate=0.3) %>%
   
-  #Hidden Layer-128 units
+ 
   #Apply an activation function to an output.
   #Relu can only be used for Hidden layers
   layer_dense(units = 128,activation = "relu") %>%
-  layer_dropout(rate=0.4) %>%
+  layer_dropout(rate=0.3) %>%
   
-  #output layer
+
   layer_dense(units=10,activation="softmax") 
   #softmax activation for Output layer which computes the probabilities for the classes
   
@@ -93,8 +87,7 @@ model %>%
 summary(model)
 
 
-#Compiling the Model and Optimizing the model
-#Configure a Keras model for training using compile()
+#
 model %>%
   compile(loss ="categorical_crossentropy",
           optimizer = "adam",
