@@ -94,24 +94,20 @@ model %>%
           metrics= c("accuracy"))
 
 
-#Now let's train the model on the training dataset  
-#epochs = No of iterations on a dataset.
-#batchsize = Number of samples per gradient update.
+  
+
 history<-model %>% fit(train_x, train_y, epochs = 10, batch_size = 128,
                        callbacks = callback_tensorboard(log_dir = "logs/run_b"),
-                       validation_split = 0.2) #train on 80% of train set and will evaluate 
-#model's metrics such as loss and accuracy on leftover data
-#after training --model gives
+                       validation_split = 0.3) #train on 80% of train set and will evaluate 
 
-#loss: 0.1085 - acc: 0.9700 - val_loss: 0.0924 - val_acc: 0.9756
+
 summary(history)
 history$params
-history$metrics # gives loss and acuracy metric for each epoch(iteration over training data)
+history$metrics 
 
-#plotting Model - epoch vs acc and Loss
 plot(history,labels=T)
 which.min(history$metrics$acc)
-#Accuracy least for 1st epoch and highest for last epoch-10
+
 plot(x = history$metrics$acc,y = history$metrics$loss,
      pch=19,col='red',type='b',
      ylab="Error on trining Data",xlab="Accuracy on Training Data")
